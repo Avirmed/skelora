@@ -1,0 +1,7 @@
+# Python 3.11; install PyTorch with CUDA from https://pytorch.org (tested: torch 2.11.0+cu128)
+torch>=2.4
+numpy>=1.26
+# needed by the CTR-GCN code in third_party/CTR-GCN
+pyyaml
+tqdm
+tensorboardX

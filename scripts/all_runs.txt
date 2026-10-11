@@ -1,0 +1,71 @@
+# Every train.py run of the study, in the order it was run (arguments of src/skar/train.py).
+# Copy the lines you need to experiments/queue.txt and start: python src/runner/run_queue.py
+# Runs with --init experiments/<run>/final.pt need that source run first; ofc_* and
+# official_* runs need the official CTR-GCN checkpoint in third_party/ctrgcn_pretrained/.
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --name xsub_lora_ft_r8_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune full --name xsub_full
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune linear --name xsub_linear
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --lr 0.02 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --name xsub_lora_ft_r8_topo_lr002
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --lr 0.02 --tune full --name xsub_full_lr002
+--benchmark ntu60_xset_src --name base_ntu60xsetsrc_joint
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --name xset_lora_ft_r8_topo
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune full --name xset_full
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune linear --name xset_linear
+--benchmark ntu60_xview --name base_ntu60xview_joint
+--benchmark ntu120_xsub --name scratch_ntu120xsub_joint
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 4 --tune-topo --name xsub_lora_ft_r4_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 16 --tune-topo --name xsub_lora_ft_r16_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 2 --tune-topo --name xsub_lora_ft_r2_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 8 --name xsub_lora_ft_r8
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets f --lora-rank 8 --tune-topo --name xsub_lora_f_r8_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets t --lora-rank 8 --tune-topo --name xsub_lora_t_r8_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets frt --lora-rank 8 --tune-topo --name xsub_lora_frt_r8_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune bn --tune-topo --name xsub_bn_topo
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune bn --name xsub_bn
+--benchmark ntu120_xset --name scratch_ntu120xset_joint
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune bn --name xset_bn
+--benchmark ntu60_xsub --modality bone --name base_ntu60xsub_bone
+--benchmark ntu120_xsub --modality bone --init experiments/base_ntu60xsub_bone/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --name xsub_lora_ft_r8_topo_bone
+--benchmark ntu120_xsub --modality bone --init experiments/base_ntu60xsub_bone/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune full --name xsub_full_bone
+--benchmark ntu60_xset_src --modality bone --name base_ntu60xsetsrc_bone
+--benchmark ntu120_xset --modality bone --init experiments/base_ntu60xsetsrc_bone/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --name xset_lora_ft_r8_topo_bone
+--benchmark ntu120_xset --modality bone --init experiments/base_ntu60xsetsrc_bone/final.pt --epochs 20 --warmup 2 --steps 12 17 --eval-every 5 --eval-last 5 --tune full --name xset_full_bone
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-classes new --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xsub_lora
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-classes new --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xsub_full
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-classes new --tune linear --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xsub_linear
+--benchmark ntu120_xsub --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name scratch20_ntu120xsub_joint
+--benchmark ntu120_xset --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name scratch20_ntu120xset_joint
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --name low10_xsub_lora
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --name low10_xsub_full
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune linear --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --name low10_xsub_linear
+--benchmark ntu120_xsub --train-frac 0.1 --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --name low10_xsub_scratch
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --name low05_xsub_lora
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune full --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --name low05_xsub_full
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune linear --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --name low05_xsub_linear
+--benchmark ntu120_xsub --train-frac 0.05 --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --name low05_xsub_scratch
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --name low01_xsub_lora
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune full --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --name low01_xsub_full
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune linear --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --name low01_xsub_linear
+--benchmark ntu120_xsub --train-frac 0.01 --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --name low01_xsub_scratch
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --seed 2 --name xsub_lora_ft_r8_topo_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --seed 2 --name xsub_full_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --seed 3 --name xsub_lora_ft_r8_topo_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --seed 3 --name xsub_full_s3
+--benchmark ntu120_xsub --init third_party/ctrgcn_pretrained/ntu60_xsub_joint/runs-60-37560.pt --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ofc_xsub_lora
+--benchmark ntu120_xsub --init third_party/ctrgcn_pretrained/ntu60_xsub_joint/runs-60-37560.pt --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ofc_xsub_full
+--benchmark ntu120_xset --eval-only --init experiments/base_ntu60xsetsrc_joint/final.pt --name ci_xset_source
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --train-classes new --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xset_lora
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --train-classes new --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xset_full
+--benchmark ntu120_xset --init experiments/base_ntu60xsetsrc_joint/final.pt --train-classes new --tune linear --epochs 20 --warmup 2 --steps 12 17 --eval-last 5 --name ci_xset_linear
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --seed 2 --name low10_xsub_lora_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --seed 2 --name low10_xsub_full_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --seed 2 --name low05_xsub_lora_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune full --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --seed 2 --name low05_xsub_full_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --seed 2 --name low01_xsub_lora_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune full --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --seed 2 --name low01_xsub_full_s2
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --seed 3 --name low10_xsub_lora_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.1 --tune full --epochs 20 --warmup 2 --steps 12 17 --eval-every 1000 --eval-last 1 --seed 3 --name low10_xsub_full_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --seed 3 --name low05_xsub_lora_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.05 --tune full --epochs 40 --warmup 4 --steps 24 34 --eval-every 1000 --eval-last 1 --seed 3 --name low05_xsub_full_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune lora --lora-targets ft --lora-rank 8 --tune-topo --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --seed 3 --name low01_xsub_lora_s3
+--benchmark ntu120_xsub --init experiments/base_ntu60xsub_joint/final.pt --train-frac 0.01 --tune full --epochs 200 --warmup 20 --steps 120 170 --eval-every 1000 --eval-last 1 --seed 3 --name low01_xsub_full_s3

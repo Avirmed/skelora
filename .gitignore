@@ -1,0 +1,12 @@
+# data, results and third-party code are not part of the repository
+data/
+experiments/
+third_party/
+# Python
+__pycache__/
+*.pyc
+# large binaries
+*.pt
+*.pth
+*.npy
+*.npz

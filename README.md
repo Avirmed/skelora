@@ -14,7 +14,8 @@ What the code provides:
   (conv1, conv2, conv4), `t` = temporal convolutions and block residuals. `--tune-topo` also trains the
   shared topology (PA) and alpha.
 - Adaptation settings: complete target training set, class-balanced low-data subsets
-  (`--train-frac`), and learning only the new classes A061-A120 without old-class data
+  (`--train-frac`; `--subset-seed` draws an independent subset, the default subset 0 is the same for
+  every method and training seed), and learning only the new classes A061-A120 without old-class data
   (`--train-classes new`; loss over the new-class logits, source classifier rows kept fixed).
 - A fast data pipeline: parallel preprocessing into one variable-length array, and GPU augmentation
   that matches the CTR-GCN feeder.
@@ -65,7 +66,7 @@ python src/skar/train.py --benchmark ntu120_xsub --init experiments/base_ntu60xs
     --eval-last 5 --name xsub_lora_ft_r8_topo
 
 # baselines: --tune full | linear | bn ; training from scratch: omit --init
-# low-data: --train-frac 0.1 ; new classes only: --train-classes new
+# low-data: --train-frac 0.1 [--subset-seed 1] ; new classes only: --train-classes new
 # test a checkpoint: --eval-only --init <checkpoint>
 ```
 
@@ -84,11 +85,18 @@ python src/runner/status.py                     # progress, finish times, finish
 python src/analysis/ensemble.py xsub_full xsub_full_bone            # multi-stream score ensemble
 python src/analysis/class_split.py xsub_lora_ft_r8_topo xsub_full   # accuracy on old / new classes
 python src/analysis/incremental.py ci_xsub_source ci_xsub_linear ci_xsub_full ci_xsub_lora
+python src/analysis/lowdata.py                                       # low-data robustness tables
 ```
 
 `incremental.py` evaluates runs trained with `--train-classes new`: the old-class head and the
 new-class head are combined by their maximum softmax probability (single adapted model, or source
 model + adapted model), with the raw-logit rule and the oracle decision as references.
+
+`lowdata.py` summarizes the low-data runs of `scripts/all_runs.txt` (1%, 5%, and 10% of the NTU RGB+D
+120 X-Sub training set): SkelLoRA, full fine-tuning, and the linear probe on three independently
+sampled subsets; component ablations (with and without topology tuning, LoRA on `t` or `f` only,
+topology + BN, BN only) over three training seeds; and a learning-rate check (0.1, 0.02, 0.01) for full
+fine-tuning and SkelLoRA.
 
 ## Tests
 
@@ -103,7 +111,7 @@ python src/tests/test_augment.py   # GPU augmentation matches the CTR-GCN feeder
 src/skar/       data.py (splits, loader, GPU augmentation), lora.py, train.py
 src/prep/       prepare_ntu.py
 src/runner/     run_queue.py, status.py
-src/analysis/   ensemble.py, class_split.py, incremental.py
+src/analysis/   ensemble.py, class_split.py, incremental.py, lowdata.py
 src/tests/      test_lora.py, test_augment.py
 scripts/        all_runs.txt
 ```

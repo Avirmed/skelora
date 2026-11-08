@@ -58,6 +58,7 @@ def get_args():
     p.add_argument('--train-classes', default='all', choices=['all', 'new'],
                    help="'new': train only on A061-A120; the source classifier rows of A001-A060 stay fixed")
     p.add_argument('--train-frac', type=float, default=1.0, help='class-balanced fraction of the training set')
+    p.add_argument('--subset-seed', type=int, default=0, help='seed of the class-balanced subset (--train-frac)')
     p.add_argument('--eval-only', action='store_true', help='evaluate --init on the test set without training')
     p.add_argument('--eval-every', type=int, default=5)
     p.add_argument('--eval-last', type=int, default=10, help='evaluate every epoch for the last N epochs')
@@ -87,7 +88,7 @@ def load_source(model, path):
 
 
 def class_balanced_subset(idx, labels, frac, seed=0):
-    """Keep round(frac * n_c), at least 1, samples of every class. The subset depends only on frac,
+    """Keep round(frac * n_c), at least 1, samples of every class. The subset depends only on frac and seed,
     so every method and training seed sees the same samples."""
     rng = np.random.default_rng(seed)
     keep = []
@@ -191,7 +192,7 @@ def main():
         assert args.init and num_class > N_OLD, '--train-classes new needs a source model and NTU120'
         tr_idx = tr_idx[meta['label'][tr_idx] >= N_OLD]
     if args.train_frac < 1:
-        tr_idx = class_balanced_subset(tr_idx, meta['label'], args.train_frac)
+        tr_idx = class_balanced_subset(tr_idx, meta['label'], args.train_frac, args.subset_seed)
     train_data, test_data = NTUData(meta, tr_idx), NTUData(meta, te_idx)
     train_loader = BatchLoader(train_data, args.batch_size, True, True, seed=args.seed)
     test_loader = BatchLoader(test_data, 64, False, False)
@@ -304,7 +305,7 @@ def main():
         'lora_targets': args.lora_targets if args.tune == 'lora' else None,
         'lora_rank': args.lora_rank if args.tune == 'lora' else None,
         'tune_topo': args.tune_topo, 'init': args.init, 'epochs': args.epochs, 'seed': args.seed,
-        'train_classes': args.train_classes, 'train_frac': args.train_frac, 'n_train_samples': len(train_data),
+        'train_classes': args.train_classes, 'train_frac': args.train_frac, 'subset_seed': args.subset_seed, 'n_train_samples': len(train_data),
         'final_top1': history[-1]['top1'], 'final_top5': history[-1]['top5'],
         'best_top1': best[0], 'best_epoch': best[1],
         'params_backbone': n_backbone, 'params_lora': n_lora, 'params_trainable': n_train,

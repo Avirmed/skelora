@@ -124,3 +124,5 @@ scripts/        all_runs.txt
   from it.
 - NTU RGB+D and NTU RGB+D 120 are subject to the dataset authors' terms of use. No data, processed
   data, or model weights are distributed here.
+
+See `scripts/all_runs.txt` for the exact command line of every reported run.
